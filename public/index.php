@@ -1,10 +1,10 @@
 <?php
 
 // Define path to application directory
-define(APPLICATION_PATH, realpath(__DIR__ . '/../application'));
+define('APPLICATION_PATH', realpath(__DIR__ . '/../application'));
 
 // Define path to application libraries
-define(APPLICATION_LIBRARY_PATH, realpath(__DIR__ . '/../library'));
+define('APPLICATION_LIBRARY_PATH', realpath(__DIR__ . '/../library'));
 
 // build the include_path
 set_include_path(
@@ -44,8 +44,10 @@ if (!$ajax) {
     include_once APPLICATION_PATH . '/pages/header.php';
 }
 
+require_once 'BookStore/Application/Application.php';
+$application = new \BookStore\Application\Application($config);
 //include modulul
-include_once (APPLICATION_PATH . '/pages/' . $page);
+$application->openPage($page);
 
 if (!$ajax) {
     //include footer
